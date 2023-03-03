@@ -1,4 +1,6 @@
-import requests, time, json
+import requests
+import time
+import json
 
 
 vacancies_ids = set()
@@ -7,8 +9,9 @@ vacancies_ids = set()
 def get_page(page=0):
 
     params = {
-        'text': 'python',  # Текст фильтра. В имени должно быть слово "Аналитик"
-        'area': 16,  # Поиск ощуществляется по вакансиям города Минск
+        'text': 'Водитель',  # Текст фильтра. В имени должно быть слово "Аналитик"
+        'area': 1002,  # Поиск ощуществляется по вакансиям города Минск
+        'salary': 1500,  # Заработная плата
         'page': page,  # Индекс страницы поиска на HH
         'per_page': 100,  # Кол-во вакансий на 1 странице
         'period': 1
@@ -24,8 +27,8 @@ def parse_data():
     lst_objs, new_objs = [], []
     for i in range(11):
         json_data = get_page(i)
-        jsObj = json.loads(json_data)
-        lst_objs.extend(jsObj['items'])
+        jsobj = json.loads(json_data)
+        lst_objs.extend(jsobj['items'])
 
         time.sleep(0.25)
 
